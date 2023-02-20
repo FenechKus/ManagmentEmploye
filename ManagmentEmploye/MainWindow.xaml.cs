@@ -24,5 +24,45 @@ namespace ManagmentEmploye
         {
             InitializeComponent();
         }
+
+        private void Help(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MinimazeButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MaximizeButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CloseButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Add(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ComboSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void EditButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

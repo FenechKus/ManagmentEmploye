@@ -3,10 +3,69 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ManagmentEmploye"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+         Title="EmployeeManager" Height="450" Width="1280" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="490*"/>
+            <ColumnDefinition Width="45"/>
+            <ColumnDefinition Width="234*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
+        <TextBlock Margin="15 2 0 0" Text="Employee INC" FontSize="22" HorizontalAlignment="Left" FontFamily="Segoe UI Black"/>
+        <WrapPanel  HorizontalAlignment="Right" Grid.ColumnSpan="3" Margin="0 1 2 0">
+            <Button Content="?" Click="Help"/>
+            <Button Content="{materialDesign:PackIcon Kind=WindowMinimize}" Margin="1 0" Click="MinimazeButton"/>
+            <Button Content="{materialDesign:PackIcon Kind=WindowMaximize}" Margin="1 0" Click="MaximizeButton"/>
+            <Button Content="{materialDesign:PackIcon Kind=WindowClose}" Margin="1 0" Click="CloseButton"/>
+        </WrapPanel>
+        <TextBox Grid.Column="0" FontSize="15" Grid.Row="1" materialDesign:HintAssist.Hint="Search" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="TextBox_TextChanged"  Margin="0 0 10 0" Cursor="IBeam"/>
+        <Button x:Name="EditBtn" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Width="45" Content="{materialDesign:PackIcon Kind=Add}" Click="Add" Cursor="Hand"/>
+        <ComboBox Grid.Column="2" Grid.Row="1"  Margin="10 0 0 0" Style="{StaticResource MaterialDesignComboBox}" x:Name="ComboSelect" SelectedIndex="0" SelectionChanged="ComboSelect_SelectionChanged" HorizontalContentAlignment="Left">
+            <ComboBoxItem>
+                <TextBlock Text="ID"/>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="Surename"/>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="MaritalStatus"/>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="Position"/>
+            </ComboBoxItem>
+        </ComboBox>
+
+        <ListView ItemsSource="{Binding Path=Personals}" Grid.Row="2" Grid.ColumnSpan="3">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn x:Name="IDColumn" Header="ID" DisplayMemberBinding="{Binding Path= ID}"/>
+                        <GridViewColumn x:Name="NameColumn" Header="Name" DisplayMemberBinding="{Binding Path=FirstName}"/>
+                        <GridViewColumn x:Name="SurnameColumn" Header="Surname" DisplayMemberBinding="{Binding Path=Surename}"/>
+                        <GridViewColumn x:Name="Patronomic" Header="Patronomic" DisplayMemberBinding="{Binding Path=Patronomic}"/>
+                        <GridViewColumn x:Name="Age" Header="Age" DisplayMemberBinding="{Binding Path=Age}"/>
+                        <GridViewColumn x:Name="MaritalStatus" Header="MaterialStatus" DisplayMemberBinding="{Binding Path=MaritalStatus}"/>
+                        <GridViewColumn x:Name="Child" Header="Child" DisplayMemberBinding="{Binding Path=Child}"/>
+                        <GridViewColumn x:Name="Position" Header="Position" DisplayMemberBinding="{Binding Path=Position}"/>
+                        <GridViewColumn x:Name="AcademicDegree" Header="AcademicDegree" DisplayMemberBinding="{Binding Path=AcademicDegree}"/>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Edit" Click="EditButton"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
