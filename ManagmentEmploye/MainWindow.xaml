@@ -33,13 +33,16 @@
                 <TextBlock Text="ID"/>
             </ComboBoxItem>
             <ComboBoxItem>
-                <TextBlock Text="Surename"/>
+                <TextBlock Text="FirstName"/>
             </ComboBoxItem>
             <ComboBoxItem>
-                <TextBlock Text="MaritalStatus"/>
+                <TextBlock Text="LastName"/>
             </ComboBoxItem>
             <ComboBoxItem>
                 <TextBlock Text="Position"/>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="Salary"/>
             </ComboBoxItem>
         </ComboBox>
 
@@ -47,15 +50,12 @@
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn x:Name="IDColumn" Header="ID" DisplayMemberBinding="{Binding Path= ID}"/>
-                        <GridViewColumn x:Name="NameColumn" Header="Name" DisplayMemberBinding="{Binding Path=FirstName}"/>
-                        <GridViewColumn x:Name="SurnameColumn" Header="Surname" DisplayMemberBinding="{Binding Path=Surename}"/>
-                        <GridViewColumn x:Name="Patronomic" Header="Patronomic" DisplayMemberBinding="{Binding Path=Patronomic}"/>
-                        <GridViewColumn x:Name="Age" Header="Age" DisplayMemberBinding="{Binding Path=Age}"/>
-                        <GridViewColumn x:Name="MaritalStatus" Header="MaterialStatus" DisplayMemberBinding="{Binding Path=MaritalStatus}"/>
-                        <GridViewColumn x:Name="Child" Header="Child" DisplayMemberBinding="{Binding Path=Child}"/>
-                        <GridViewColumn x:Name="Position" Header="Position" DisplayMemberBinding="{Binding Path=Position}"/>
-                        <GridViewColumn x:Name="AcademicDegree" Header="AcademicDegree" DisplayMemberBinding="{Binding Path=AcademicDegree}"/>
+                        <GridViewColumn x:Name="IDColumn" Header="ID"/>
+                        <GridViewColumn x:Name="NameColumn" Header="FirstName"/>
+                        <GridViewColumn x:Name="SurnameColumn" Header="Lastname"/>
+                        <GridViewColumn x:Name="Age" Header="Age"/>
+                        <GridViewColumn x:Name="Position" Header="Position"/>
+                        <GridViewColumn x:Name="Salary" Header="Salary"/>
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
