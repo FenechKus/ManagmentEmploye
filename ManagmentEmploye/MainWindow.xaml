@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ManagmentEmploye"
         mc:Ignorable="d"
-         Title="EmployeeManager" Height="450" Width="1280" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" WindowStyle="None">
+         Title="EmployeeManager" Height="450" Width="800" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseLeftButtonDown="LeftButtonDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="490*"/>
@@ -21,13 +21,14 @@
 
         <TextBlock Margin="15 2 0 0" Text="Employee INC" FontSize="22" HorizontalAlignment="Left" FontFamily="Segoe UI Black"/>
         <WrapPanel  HorizontalAlignment="Right" Grid.ColumnSpan="3" Margin="0 1 2 0">
-            <Button Content="?" Click="Help"/>
+            <Button Content="{materialDesign:PackIcon Kind=Update}" Click="Help"/>
             <Button Content="{materialDesign:PackIcon Kind=WindowMinimize}" Margin="1 0" Click="MinimazeButton"/>
             <Button Content="{materialDesign:PackIcon Kind=WindowMaximize}" Margin="1 0" Click="MaximizeButton"/>
             <Button Content="{materialDesign:PackIcon Kind=WindowClose}" Margin="1 0" Click="CloseButton"/>
         </WrapPanel>
         <TextBox Grid.Column="0" FontSize="15" Grid.Row="1" materialDesign:HintAssist.Hint="Search" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="TextBox_TextChanged"  Margin="0 0 10 0" Cursor="IBeam"/>
         <Button x:Name="EditBtn" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Width="45" Content="{materialDesign:PackIcon Kind=Add}" Click="Add" Cursor="Hand"/>
+       
         <ComboBox Grid.Column="2" Grid.Row="1"  Margin="10 0 0 0" Style="{StaticResource MaterialDesignComboBox}" x:Name="ComboSelect" SelectedIndex="0" SelectionChanged="ComboSelect_SelectionChanged" HorizontalContentAlignment="Left">
             <ComboBoxItem>
                 <TextBlock Text="ID"/>
@@ -46,20 +47,20 @@
             </ComboBoxItem>
         </ComboBox>
 
-        <ListView ItemsSource="{Binding Path=Personals}" Grid.Row="2" Grid.ColumnSpan="3">
+        <ListView x:Name="ListEmployee" ItemsSource="{Binding Path=Employee}" Grid.Row="2" Grid.ColumnSpan="3">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn x:Name="IDColumn" Header="ID"/>
-                        <GridViewColumn x:Name="NameColumn" Header="FirstName"/>
-                        <GridViewColumn x:Name="SurnameColumn" Header="Lastname"/>
-                        <GridViewColumn x:Name="Age" Header="Age"/>
-                        <GridViewColumn x:Name="Position" Header="Position"/>
-                        <GridViewColumn x:Name="Salary" Header="Salary"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" x:Name="IDColumn" Header="ID"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" x:Name="NameColumn" Header="FirstName"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}" x:Name="SurnameColumn" Header="Lastname"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Age}" x:Name="Age" Header="Age"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Position}" x:Name="Position" Header="Position"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Salary}" x:Name="Salary" Header="Salary"/>
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Edit" Click="EditButton"/>
+                                    <Button x:Name="RemoveBtn" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Width="45" Height="25" Content="{materialDesign:PackIcon Kind=Remove}" Click="Remove" Cursor="Hand"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
