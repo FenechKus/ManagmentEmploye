@@ -26,27 +26,7 @@
             <Button Content="{materialDesign:PackIcon Kind=WindowMaximize}" Margin="1 0" Click="MaximizeButton"/>
             <Button Content="{materialDesign:PackIcon Kind=WindowClose}" Margin="1 0" Click="CloseButton"/>
         </WrapPanel>
-        <TextBox Grid.Column="0" FontSize="15" Grid.Row="1" materialDesign:HintAssist.Hint="Search" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="TextBox_TextChanged"  Margin="0 0 10 0" Cursor="IBeam"/>
         <Button x:Name="EditBtn" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Width="45" Content="{materialDesign:PackIcon Kind=Add}" Click="Add" Cursor="Hand"/>
-       
-        <ComboBox Grid.Column="2" Grid.Row="1"  Margin="10 0 0 0" Style="{StaticResource MaterialDesignComboBox}" x:Name="ComboSelect" SelectedIndex="0" SelectionChanged="ComboSelect_SelectionChanged" HorizontalContentAlignment="Left">
-            <ComboBoxItem>
-                <TextBlock Text="ID"/>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock Text="FirstName"/>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock Text="LastName"/>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock Text="Position"/>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock Text="Salary"/>
-            </ComboBoxItem>
-        </ComboBox>
-
         <ListView x:Name="ListEmployee" ItemsSource="{Binding Path=Employee}" Grid.Row="2" Grid.ColumnSpan="3">
             <ListView.View>
                 <GridView>

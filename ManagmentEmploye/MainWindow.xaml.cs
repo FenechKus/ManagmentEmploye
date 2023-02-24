@@ -1,4 +1,5 @@
-﻿using System;
+﻿global using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,7 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RestSharp;
 
 namespace ManagmentEmploye
 {
@@ -24,16 +24,14 @@ namespace ManagmentEmploye
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ObservableCollection<Employee> employees;
         public MainWindow()
         {
             InitializeComponent();
             GetEmployees();
         }
 
-        private void Help(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void Help(object sender, RoutedEventArgs e) => GetEmployees();
 
         private void GetEmployees()
         {
@@ -41,7 +39,7 @@ namespace ManagmentEmploye
             var request = new RestRequest("/GetEmployees.php");
             RestResponse response = client.Execute(request);
             string json = response.Content.ToString();
-            ObservableCollection<Employee> employees = JsonSerializer.Deserialize<ObservableCollection<Employee>>(json);
+            employees = JsonSerializer.Deserialize<ObservableCollection<Employee>>(json);
             ListEmployee.ItemsSource = employees;
             foreach (var item in employees)
             {
@@ -69,22 +67,8 @@ namespace ManagmentEmploye
 
         private void Add(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void ComboSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void EditButton(object sender, RoutedEventArgs e)
-        { 
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            AddView addView = new AddView();
+            addView.ShowDialog();
         }
 
         private void LeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -101,8 +85,8 @@ namespace ManagmentEmploye
 
                 var client = new RestClient("http://f0772709.xsph.ru/API");
                 var request = new RestRequest($"/RemoveEmploye.php?id={emp.Id}");
-                //WebClient webClient = new WebClient()
-                //request.AddParameter("id", emp.Id);
+                WebClient webClient = new WebClient();
+                request.AddParameter("id", emp.Id);
                 client.Execute(request);
                 ListEmployee.ItemsSource = null;
                 ListEmployee.Items.Remove(emp);
