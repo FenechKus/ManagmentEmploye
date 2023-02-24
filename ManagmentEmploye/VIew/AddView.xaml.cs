@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ManagmentEmploye
+namespace ManagmentEmploye.VIew
 {
     /// <summary>
     /// Логика взаимодействия для AddView.xaml
@@ -33,15 +33,15 @@ namespace ManagmentEmploye
             request.AddParameter("Age", AgeBox.Text);
             request.AddParameter("Position", PositionBox.Text);
             request.AddParameter("Salary", SalaryBox.Text);
-            RestResponse response = client.Execute(request);
-
-
+            client.Execute(request);
             this.Close();
         }
 
         private void Close(object sender, RoutedEventArgs e)
         {
-
+            MessageBoxResult question = MessageBox.Show("Are you sure to close this window?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (question == MessageBoxResult.Yes)
+                this.Close();
         }
     }
 }

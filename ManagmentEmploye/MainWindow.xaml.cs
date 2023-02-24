@@ -1,4 +1,5 @@
 ﻿global using RestSharp;
+using ManagmentEmploye.VIew;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,11 +41,10 @@ namespace ManagmentEmploye
             RestResponse response = client.Execute(request);
             string json = response.Content.ToString();
             employees = JsonSerializer.Deserialize<ObservableCollection<Employee>>(json);
-            ListEmployee.ItemsSource = employees;
-            foreach (var item in employees)
-            {
-
-            }
+            if (employees != null)
+                ListEmployee.ItemsSource = employees;
+            else
+                MessageBox.Show("List Empty!", "Warning!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void MinimazeButton(object sender, RoutedEventArgs e)
@@ -62,6 +62,9 @@ namespace ManagmentEmploye
 
         private void CloseButton(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult question = MessageBox.Show("Are you sure to close this window?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (question == MessageBoxResult.Yes)
+                this.Close();
             Application.Current.Shutdown();
         }
 
@@ -69,6 +72,7 @@ namespace ManagmentEmploye
         {
             AddView addView = new AddView();
             addView.ShowDialog();
+            GetEmployees();
         }
 
         private void LeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -78,20 +82,16 @@ namespace ManagmentEmploye
 
         private void Remove(object sender, RoutedEventArgs e)
         {
-            
-            if (ListEmployee.SelectedItems.Count > 0)
-            {
-                Employee emp = (Employee)((Button)sender).DataContext;
-
-                var client = new RestClient("http://f0772709.xsph.ru/API");
-                var request = new RestRequest($"/RemoveEmploye.php?id={emp.Id}");
-                WebClient webClient = new WebClient();
-                request.AddParameter("id", emp.Id);
-                client.Execute(request);
-                ListEmployee.ItemsSource = null;
-                ListEmployee.Items.Remove(emp);
-                GetEmployees();
-            }
+            Button button = (Button)sender;
+            Employee emp = (Employee)button.DataContext;
+            var client = new RestClient("http://f0772709.xsph.ru/API");
+            var request = new RestRequest($"/RemoveEmploye.php?id={emp.Id}");
+            WebClient webClient = new WebClient();
+            request.AddParameter("id", emp.Id);
+            client.Execute(request);
+            ListEmployee.ItemsSource = null;
+            ListEmployee.Items.Remove(emp);
+            GetEmployees();
         }
     }
 }
